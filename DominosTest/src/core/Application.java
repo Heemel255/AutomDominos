@@ -17,7 +17,7 @@ public class Application {
 		
 		//create list of accounts in csv - not necessary if csv already exists
 		//!!! always change accountNum new run, add +1 
-		int accountNum = 62;
+		int accountNum = 63;
 		
 		int totData = 9;
 		writeCsv(totData, accountNum, csvLoc);
@@ -32,7 +32,6 @@ public class Application {
 				threadCount = allData.size();
 			
 			List<AccountUnit> accountUnit = seperate(threadCount, allData);
-			
 			
 			//start threads
 			for(int i = 0; i < threadCount; i++) 
@@ -62,45 +61,40 @@ public class Application {
 	{
 		LogIn lin = new LogIn(wd);
 		
-		for(int i = 0; i < au.getTotal(); i++) {
-			
+		for(int i = 0; i < au.getTotal(); i++)
 			lin.logInRepeater(au.getEmail().get(i), au.getPassWord().get(i));
-		}
 	}
 	
 	public static void signUp(AccountUnit au, WebDriver wd) 
 	{
 		SignUp su = new SignUp(wd);
 		
-		for(int i = 0; i < au.getTotal(); i++) {
-			
+		for(int i = 0; i < au.getTotal(); i++) 
 			su.signUpRepeater(au.getEmail().get(i), au.getFirstName().get(i), au.getLastName().get(i), au.getPhone().get(i), au.getPassWord().get(i));
-		}
 	}
 	
 	public static List<AccountUnit> seperate(int numSize, List<List<String>> allData) 
 	{
 		List<AccountUnit> liAU = new ArrayList<AccountUnit>();
 		
-		for(int i = 0; i < numSize; i++) {
+		for(int i = 0; i < numSize; i++) 
 			liAU.add(new AccountUnit());
-		}
 		
 		int incIndex = 0;
 		int extrasIncIndex = 0;
 		for(int q = 0; q < allData.size(); q++) {
 			
-			if((q + 1) <= (allData.size() - (allData.size() % numSize))) {
+			if(q  < (allData.size() - (allData.size() % numSize))) {
 				
 				
-				liAU.get(incIndex).add(allData.get(q).get(0), allData.get(q).get(1), allData.get(q).get(2), allData.get(q).get(3), allData.get(q).get(4));
+				liAU.get(incIndex).addUnit(allData.get(q).get(0), allData.get(q).get(1), allData.get(q).get(2), allData.get(q).get(3), allData.get(q).get(4));
 				
 				if(((q + 1) % (allData.size() / numSize) == 0) && (incIndex + 1 < numSize)) 
 					incIndex++;
 			}
 			else {
 				
-				liAU.get(extrasIncIndex).add(allData.get(q).get(0), allData.get(q).get(1), allData.get(q).get(2), allData.get(q).get(3), allData.get(q).get(4));
+				liAU.get(extrasIncIndex).addUnit(allData.get(q).get(0), allData.get(q).get(1), allData.get(q).get(2), allData.get(q).get(3), allData.get(q).get(4));
 				extrasIncIndex++;
 			}	
 		}

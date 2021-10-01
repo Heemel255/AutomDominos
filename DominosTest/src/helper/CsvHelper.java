@@ -68,7 +68,6 @@ public class CsvHelper {
 				FileWriter fw = new FileWriter(loc, true);
 				CSVPrinter csvPrint = new CSVPrinter(fw, CSVFormat.EXCEL);
 				
-				//create some data to use
 				//format is: email, firstname, lastname, phone num, password
 				String[][] input = new String[amt][5];
 				for(int i = 0; i < input.length; i++) {
