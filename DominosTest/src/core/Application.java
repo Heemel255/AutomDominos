@@ -86,10 +86,9 @@ public class Application {
 			
 			if(q  < (allData.size() - (allData.size() % numSize))) {
 				
-				
 				liAU.get(incIndex).addUnit(allData.get(q).get(0), allData.get(q).get(1), allData.get(q).get(2), allData.get(q).get(3), allData.get(q).get(4));
 				
-				if(((q + 1) % (allData.size() / numSize) == 0) && (incIndex + 1 < numSize)) 
+				if((q + 1) % (allData.size() / numSize) == 0) 
 					incIndex++;
 			}
 			else {
