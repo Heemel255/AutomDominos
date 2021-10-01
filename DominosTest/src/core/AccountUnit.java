@@ -23,7 +23,7 @@ public class AccountUnit {
 		total = 0;
 	}
 	
-	public void add(String e, String f, String l, String ph, String ps)
+	public void addUnit(String e, String f, String l, String ph, String ps)
 	{
 		addEmail(e);
 		addFirstName(f);
@@ -33,7 +33,7 @@ public class AccountUnit {
 		updateTotal();
 	}
 	
-	public void updateTotal()
+	private void updateTotal()
 	{
 		total++;
 	}
@@ -43,27 +43,27 @@ public class AccountUnit {
 		return total;
 	}
 	
-	public void addEmail(String s)
+	private void addEmail(String s)
 	{
 		email.add(s);
 	}
 	
-	public void addFirstName(String s)
+	private void addFirstName(String s)
 	{
 		firstName.add(s);
 	}
 
-	public void addLastName(String s)
+	private void addLastName(String s)
 	{
 		lastName.add(s);
 	}
 	
-	public void addPhone(String s)
+	private void addPhone(String s)
 	{
 		phone.add(s);
 	}
 	
-	public void addPassWord(String s)
+	private void addPassWord(String s)
 	{
 		passWord.add(s);
 	}
@@ -92,7 +92,4 @@ public class AccountUnit {
 	{
 		return passWord;
 	}
-	
-	
-	
 }
