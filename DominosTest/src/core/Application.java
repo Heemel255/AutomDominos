@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import helper.CsvHelper;
 
@@ -16,10 +17,10 @@ public class Application {
 		String csvLoc = "C:\\Users\\heeme\\Documents\\dominos_accounts.csv";
 		
 		//create list of accounts in csv - not necessary if csv already exists
-		//!!! always change accountNum new run, add +1 
-		int accountNum = 63;
+		//!!! always change accountNum new run, add +1 - or else account with same details created
+		int accountNum = 100;
 		
-		int totData = 9;
+		int totData = 15;
 		writeCsv(totData, accountNum, csvLoc);
 		
 		//read csv data, set threadCount, and divide data based on threadCount
@@ -44,7 +45,8 @@ public class Application {
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
-				WebDriver wd = new ChromeDriver();
+				//disable gpu or else timeout error sometimes
+				WebDriver wd = new ChromeDriver(new ChromeOptions().addArguments("--disable-gpu"));
 				wd.manage().window().maximize();
 				
 				signUp(au, wd);
