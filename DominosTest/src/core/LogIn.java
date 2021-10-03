@@ -1,7 +1,5 @@
 package core;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,7 +28,6 @@ public class LogIn {
 	
 	public void logInRepeater(String emailStr, String passStr)
 	{
-		new WebDriverWait(wd, 10).until(ExpectedConditions.titleIs("Domino's Pizza Canada® - Order Pizza Online - Dominos.ca"));
 		initPage();
 		signInButtonHome.click();
 		
@@ -39,27 +36,24 @@ public class LogIn {
 		pass.sendKeys(passStr);
 		signInButton.click();
 		
-		wd.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		signOut();
-		
 		new WebDriverWait(wd, 10).until(ExpectedConditions.titleIs("Domino's Pizza Canada® - Order Pizza Online - Dominos.ca"));
 	}
-
 	
 	private void signOut() 
 	{
-		String signOutxpath = "/html/body/header/nav[1]/div[1]/div[3]/div[2]/span[2]/a";
-		new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(signOutxpath)));
+		new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/nav[1]/div[1]/div[3]/div[2]/span[1]/a")));
 		
-		signOutButton = wd.findElement(By.xpath(signOutxpath));
+		signOutButton = wd.findElement(By.xpath("/html/body/header/nav[1]/div[1]/div[3]/div[2]/span[2]/a"));
 		signOutButton.click();
 	}
 	
 	private void initPage()
 	{
-		wd.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		String x = "/html/body/header/nav[1]/div[1]/div[3]/span/a";
+		new WebDriverWait(wd, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(x)));
 		
-		signInButtonHome = wd.findElement(By.xpath("/html/body/header/nav[1]/div[1]/div[3]/span/a"));
+		signInButtonHome = wd.findElement(By.xpath(x));
 	}
 	
 	private void initLoginBox()

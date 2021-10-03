@@ -3,6 +3,7 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,9 +19,9 @@ public class Application {
 		
 		//create list of accounts in csv - not necessary if csv already exists
 		//!!! always change accountNum new run, add +1 - or else account with same details created
-		int accountNum = 100;
+		int accountNum = 126;
 		
-		int totData = 15;
+		int totData = 19;
 		writeCsv(totData, accountNum, csvLoc);
 		
 		//read csv data, set threadCount, and divide data based on threadCount
@@ -45,8 +46,12 @@ public class Application {
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {
-				//disable gpu or else timeout error sometimes
-				WebDriver wd = new ChromeDriver(new ChromeOptions().addArguments("--disable-gpu"));
+				//use chromeoptions else timeout error sometimes
+				ChromeOptions co = new ChromeOptions();
+				co.setPageLoadStrategy(PageLoadStrategy.EAGER);
+				co.addArguments("--disable-gpu"); 
+
+				WebDriver wd = new ChromeDriver(co);
 				wd.manage().window().maximize();
 				
 				signUp(au, wd);
