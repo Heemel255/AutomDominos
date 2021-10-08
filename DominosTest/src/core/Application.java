@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import helper.CsvHelper;
+import helper.TxtHelper;
 
 public class Application {
 
@@ -19,10 +20,10 @@ public class Application {
 		
 		//create list of accounts in csv - not necessary if csv already exists
 		//!!! always change accountNum new run, add +1 - or else account with same details created
-		int accountNum = 126;
+		int an = accountNum("C:\\Users\\heeme\\Documents\\acnum.txt");
 		
 		int totData = 19;
-		writeCsv(totData, accountNum, csvLoc);
+		writeCsv(totData, an, csvLoc);
 		
 		//read csv data, set threadCount, and divide data based on threadCount
 		int threadCount = 4;
@@ -120,5 +121,17 @@ public class Application {
 		CsvHelper csvHelper = new CsvHelper(loc);
 		
 		csvHelper.initCsv(amt, accountNum);
+	}
+	
+	public static int accountNum(String loc)
+	{
+		TxtHelper tw = new TxtHelper(loc);
+		int an = 0;
+		
+		an = tw.getTxt();
+		an++;
+		tw.writeTxt(an);
+		
+		return an;
 	}
 }
